@@ -9,12 +9,12 @@ program main
 implicit none
 integer,parameter::nx=360,ny=181,nt=44
 integer::i,j,k
-real::sdc(nx,ny),satur(nx,ny),errrmse(nx,ny,nt),tp(nx,ny)
+real::sdc(nx,ny),ar(nx,ny),errrmse(nx,ny,nt),tpsd(nx,ny),tpar(nx,ny)
 
 
 open(100,file='H:\stdev\sdc.grd',form='unformatted',access='direct',recl=nx*ny)
 read(100,rec=1)sdc(:,:)
-satur(:,:)=1.414*sdc(:,:)
+ar(:,:)=1.414*sdc(:,:)
 close(100)
 print*,sdc(3,5)
 
@@ -27,14 +27,18 @@ print*,errrmse(2,4,5)
 
 do j=1,ny
   do i=1,nx
-    call pre_limit(nt,errRMSE(i,j,:),tp(i,j),satur(i,j))
+    call pre_limit(nt,errRMSE(i,j,:),tpsd(i,j),sdc(i,j))
+    call pre_limit(nt,errRMSE(i,j,:),tpar(i,j),ar(i,j))
   end do
 end do
 
-open(300,file='H:\modelError\errall\rmse\tp.grd',form='unformatted',access='direct',recl=nx*ny)
-write(300,rec=1)tp(:,:)
+open(300,file='H:\modelError\errall\rmse\tpsd.grd',form='unformatted',access='direct',recl=nx*ny)
+write(300,rec=1)tpsd(:,:)
 close(300)
 
+open(400,file='H:\modelError\errall\rmse\tpar.grd',form='unformatted',access='direct',recl=nx*ny)
+write(400,rec=1)tpar(:,:)
+close(400)
 end program
 
 !-------Subroutine process: determining the limit of predictability from the error increasing series.
