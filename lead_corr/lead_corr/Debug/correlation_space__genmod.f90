@@ -1,0 +1,13 @@
+        !COMPILER-GENERATED INTERFACE MODULE: Wed Jun 25 08:57:44 2014
+        MODULE CORRELATION_SPACE__genmod
+          INTERFACE 
+            SUBROUTINE CORRELATION_SPACE(NLON,NLAT,X,Y,LAT,R)
+              INTEGER(KIND=4) :: NLAT
+              INTEGER(KIND=4) :: NLON
+              REAL(KIND=4) :: X(NLON,NLAT)
+              REAL(KIND=4) :: Y(NLON,NLAT)
+              REAL(KIND=4) :: LAT(NLAT)
+              REAL(KIND=4) :: R
+            END SUBROUTINE CORRELATION_SPACE
+          END INTERFACE 
+        END MODULE CORRELATION_SPACE__genmod

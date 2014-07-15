@@ -4,9 +4,10 @@ integer,parameter::nx=72,ny=37,nt=17340,inter=45
 integer::i,j,t
 real::h(nx,ny,inter),hall(nx,ny,inter)
 
-	open(200,file='H:\variance_fortran\errorfield_abs.grd',form='unformatted',access='direct',recl=nx*ny*inter)
+	open(200,file='H:\variance_veryfication\errorfield_abs.grd',form='unformatted',access='direct',recl=nx*ny*inter)
 		!open(200,file='I:\fb\ncepout\ncepout.grd',form='unformatted',access='direct',recl=nx*ny)
 
+    hall=0
 	do t=1,nt
 		write(*,*)t
 		read(200,rec=t)h
@@ -21,5 +22,6 @@ real::h(nx,ny,inter),hall(nx,ny,inter)
 	close(100)
 
 	write(*,*)hall(25,25,:)
+    pause
 
 	end
